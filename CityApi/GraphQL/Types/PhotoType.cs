@@ -16,7 +16,15 @@ namespace CityApi.GraphQL.Types
             Field(p => p.CityID);
             Field(p => p.Url);
             Field(p => p.Description);
-            Field(p => p.DateAdded);
+            Field<DateGraphType>(
+                "DateAdded",
+                //resolve:context => context.Source.DateAdded.ToString("G"),
+                deprecationReason:"This Format Deprecated We Use FullDateTime "); //Classic Date Format 
+            Field<DateTimeGraphType>(
+                "DatTimeAdded",
+                resolve: context => context.Source.DateAdded.ToString("G")
+                //deprecationReason:"Bu Ar"
+                );
             Field(p => p.IsMain);
             Field(p => p.PublicID);
             Field<CityType>(
