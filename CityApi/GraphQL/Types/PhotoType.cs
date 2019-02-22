@@ -19,7 +19,7 @@ namespace CityApi.GraphQL.Types
             Field<DateGraphType>(
                 "DateAdded",
                 //resolve:context => context.Source.DateAdded.ToString("G"),
-                deprecationReason:"This Format Deprecated We Use FullDateTime "); //Classic Date Format 
+                deprecationReason: "This Format Deprecated We Use FullDateTime "); //Classic Date Format 
             Field<DateTimeGraphType>(
                 "DatTimeAdded",
                 resolve: context => context.Source.DateAdded.ToString("G")
@@ -31,7 +31,7 @@ namespace CityApi.GraphQL.Types
                 "City",
                  //arguments: new QueryArguments(new QueryArgument<IntGraphType> { Name = "City ID" }),
                  resolve: context => appRepository.GetCityByID(context.Source.CityID),
-                 description:"City"
+                 description: "City"
                 );
         }
     }

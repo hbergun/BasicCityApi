@@ -1,4 +1,5 @@
 ﻿using CityApi.Data;
+using CityApi.Dtos;
 using CityApi.GraphQL.Types;
 using CityApi.GraphQL.Types.InputType;
 using CityApi.Models;
@@ -10,22 +11,23 @@ using System.Threading.Tasks;
 
 namespace CityApi.GraphQL.Mutations
 {
-    public class ProjectMutation : ObjectGraphType
+    public class ProjectMutation : ObjectGraphType<object>
     {
-        public ProjectMutation(IAppRepository appRepository)
+       public ProjectMutation(IAuthRepository authRepository)
         {
-            Name = "CreateUserMutation";
-
+            Name = "RegisterUser";
             Field<UserType>(
-                "createUser",
+                "RegisterUser",
                 arguments: new QueryArguments(
-                //new QueryArgument<NonNullGraphType<UserInputType>> { Name = "player" }
-               // new QueryArgument<UserInputType> { Name = "user" }
+                //new QueryArgument<NonNullGraphType<UserInputType>> { Name = "User" }
+                new QueryArgument<UserInputType> { Name = "user" }
                 ),
                 resolve: context =>
                 {
-                    var user = context.GetArgument<User>("user");
-                    return appRepository.Add<User>(user);
+                var userforlogindto = context.GetArgument<UserForRegisterDto>("user");
+                    //TODO : Use AutoMapper!
+                    var user = new User { UserName = userforlogindto.UserName };
+                    return authRepository.Register(user,userforlogindto.Password);
                 });
         }
     }

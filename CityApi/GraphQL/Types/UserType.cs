@@ -17,7 +17,7 @@ namespace CityApi.GraphQL.Types
             Field<ListGraphType<CityType>>(
                 "Cities",
                 //arguments: new QueryArguments(new QueryArgument<IntGraphType> { Name = "id" }),
-                resolve: context => appRepository.GetCitiesByUserID(context.Source.ID),description: "These Cities Were Visited By The User"
+                resolve: context => appRepository.GetCitiesByUserID(context.Source.ID), description: "These Cities Were Visited By The User"
                 );
 
         }

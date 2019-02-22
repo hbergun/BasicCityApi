@@ -9,6 +9,7 @@ using CityApi.GraphQL.Mutations;
 using CityApi.GraphQL.Queries;
 using CityApi.GraphQL.Schemas;
 using CityApi.GraphQL.Types;
+using CityApi.GraphQL.Types.InputType;
 using CityApi.Helpers;
 using GraphiQl;
 using GraphQL;
@@ -54,6 +55,7 @@ namespace CityApi
             services.AddSingleton<CityType>();
             services.AddSingleton<PhotoType>();
             services.AddSingleton<UserType>();
+            services.AddSingleton<UserInputType>();
             var sp = services.BuildServiceProvider();
             services.AddSingleton<ISchema>(new ProjectSchema (new FuncDependencyResolver(type => sp.GetService(type))));
 
