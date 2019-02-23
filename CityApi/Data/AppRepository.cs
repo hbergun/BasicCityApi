@@ -52,7 +52,8 @@ namespace CityApi.Data
 
         public User GetUser(int UserID)
         {
-            return _cityContext.Users.Where(u => u.ID == UserID).FirstOrDefault();
+            //return _cityContext.Users.Where(u => u.ID == UserID).FirstOrDefault();
+            return _cityContext.Users.Include(u => u.Cities).Where(u => u.ID == UserID).FirstOrDefault();
         }
 
         public bool SaveAll()

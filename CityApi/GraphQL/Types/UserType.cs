@@ -12,13 +12,15 @@ namespace CityApi.GraphQL.Types
     {
         public UserType(IAppRepository appRepository)
         {
+            Name = "User";
             Field(u => u.ID); //UserID
             Field(u => u.UserName);
-            Field<ListGraphType<CityType>>(
-                "Cities",
-                //arguments: new QueryArguments(new QueryArgument<IntGraphType> { Name = "id" }),
-                resolve: context => appRepository.GetCitiesByUserID(context.Source.ID), description: "These Cities Were Visited By The User"
-                );
+            // Field<ListGraphType<CityType>>(
+            //     "Cities",
+            //     //arguments: new QueryArguments(new QueryArgument<IntGraphType> { Name = "id" }),
+            //     resolve: context => appRepository.GetCitiesByUserID(context.Source.ID), description: "These Cities Were Visited By The User"
+            //     );
+            Field<ListGraphType<CityType>>("cities", resolve: context => context.Source.Cities);
 
         }
     }

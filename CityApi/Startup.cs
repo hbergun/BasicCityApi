@@ -85,7 +85,7 @@ namespace CityApi
             }
 
             app.UseGraphiQl();
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
             app.UseAuthentication();
             app.UseMvc();
         }
