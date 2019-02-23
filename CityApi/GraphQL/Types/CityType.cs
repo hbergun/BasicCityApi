@@ -25,6 +25,7 @@ namespace CityApi.GraphQL.Types
                 "User",
                 resolve: context => appRepository.GetUser(context.Source.UserID)
                 );
+            Description = "City Type Description";
         }
     }
 }
